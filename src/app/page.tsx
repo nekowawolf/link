@@ -23,10 +23,10 @@ export default function HomePage() {
             avatarUrl="https://nekowawolf.github.io/cdn-images/images/2025/1763530019_113094795.jpeg"
             coverUrl="https://i.pinimg.com/736x/77/81/e2/7781e2e0d509a2ddbb0cb92282e61c38.jpg"
             links={{
-              github: 'https://github.com',
-              twitter: 'https://twitter.com',
-              linkedin: 'https://linkedin.com',
-              website: 'https://hensor.net',
+              github: 'https://github.com/nekowawolf',
+              twitter: 'https://x.com/nekowawolf_',
+              tiktok: 'https://tiktok.com/@nekowawolf',
+              website: 'https://nekowawolf.xyz/',
             }}
           />
 
@@ -34,7 +34,9 @@ export default function HomePage() {
           <SocialTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
           {/* Content Area */}
-          <ContentArea activeTab={activeTab} />
+           <div className="flex-1 overflow-hidden">
+            <ContentArea activeTab={activeTab} />
+          </div>
         </div>
 
       </div>

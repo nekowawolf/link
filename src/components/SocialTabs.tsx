@@ -10,9 +10,9 @@ interface SocialTabsProps {
 }
 
 const tabs = [
-  { id: 'all' as Tab, label: 'All Posts', count: 12 },
-  { id: 'projects' as Tab, label: 'Projects', count: 5 },
-  { id: 'designs' as Tab, label: 'Designs', count: 7 },
+  { id: 'all' as Tab, label: 'All Posts', count: 2 },
+  { id: 'projects' as Tab, label: 'Projects', count: 1 },
+  { id: 'designs' as Tab, label: 'Designs', count: 1 },
 ];
 
 export default function SocialTabs({ activeTab, onTabChange }: SocialTabsProps) {

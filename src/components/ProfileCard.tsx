@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { FaSun, FaMoon, FaGithub, FaXTwitter, FaLinkedin, FaGlobe } from 'react-icons/fa6';
+import { FaSun, FaMoon, FaGithub, FaXTwitter, FaTiktok, FaGlobe } from 'react-icons/fa6';
 import { toggleDarkMode } from '@/utils/darkmode';
 
 interface ProfileCardProps {
@@ -13,7 +13,7 @@ interface ProfileCardProps {
   links?: {
     github?: string;
     twitter?: string;
-    linkedin?: string;
+    tiktok?: string;
     website?: string;
   };
 }
@@ -99,9 +99,21 @@ export default function ProfileCard({
           {bio}
         </p>
 
-        {/* Social Links */}
+       {/* Social Links */}
         {links && (
           <div className="flex items-center gap-3 flex-wrap">
+            
+            {links.website && (
+              <a
+                href={links.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-color w-10 h-10 rounded-full border border-color flex items-center justify-center text-fill-color/70 hover:text-fill-color hover:scale-110 transition-all duration-200"
+              >
+                <FaGlobe size={18} />
+              </a>
+            )}
+
             {links.github && (
               <a
                 href={links.github}
@@ -112,6 +124,7 @@ export default function ProfileCard({
                 <FaGithub size={18} />
               </a>
             )}
+
             {links.twitter && (
               <a
                 href={links.twitter}
@@ -122,24 +135,15 @@ export default function ProfileCard({
                 <FaXTwitter size={18} />
               </a>
             )}
-            {links.linkedin && (
+
+            {links.tiktok && (
               <a
-                href={links.linkedin}
+                href={links.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="card-color w-10 h-10 rounded-full border border-color flex items-center justify-center text-fill-color/70 hover:text-fill-color hover:scale-110 transition-all duration-200"
               >
-                <FaLinkedin size={18} />
-              </a>
-            )}
-            {links.website && (
-              <a
-                href={links.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-color w-10 h-10 rounded-full border border-color flex items-center justify-center text-fill-color/70 hover:text-fill-color hover:scale-110 transition-all duration-200"
-              >
-                <FaGlobe size={18} />
+                <FaTiktok size={18} />
               </a>
             )}
           </div>
