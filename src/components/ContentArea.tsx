@@ -15,7 +15,7 @@ interface TweetPost {
   username: string;
   isVerified: boolean;
   caption: string;
-  imageUrl?: string;
+  url?: string;
   time: string;
   date: string;
   views: string;
@@ -28,8 +28,9 @@ const posts: TweetPost[] = [
     name: 'nekowawolf',
     username: 'nekowawolf',
     isVerified: true,
-    caption: '3D Model Mouse Interaction Tutorial \n\nLink: https://lynk.id/nekowawolf/l9w9391l0kk2',
-    imageUrl: 'https://nekowawolf.github.io/cdn-images/images/2026/1773012524_3d.png',
+    caption:
+      '3D Model Mouse Interaction Tutorial \n\nLink: https://lynk.id/nekowawolf/l9w9391l0kk2',
+    url: 'https://nekowawolf.github.io/cdn-images/images/2026/1773012524_3d.png',
     time: '8:30 PM',
     date: '08/03/2026',
     views: '12.5K',
@@ -40,12 +41,25 @@ const posts: TweetPost[] = [
     name: 'nekowawolf',
     username: 'nekowawolf',
     isVerified: true,
-    caption: 'web ini sepenuhnya belum selesai, selesai gk selesai yang penting production',
-    imageUrl: 'https://i.pinimg.com/736x/ea/31/70/ea3170757b604c874728307393950f0f.jpg',
+    caption:
+      'web ini sepenuhnya belum selesai, selesai gk selesai yang penting production',
+    url: 'https://i.pinimg.com/736x/ea/31/70/ea3170757b604c874728307393950f0f.jpg',
     time: '6:10 PM',
     date: '07/03/2026',
     views: '8.2K',
     category: 'designs',
+  },
+  {
+    id: 3,
+    name: 'nekowawolf',
+    username: 'nekowawolf',
+    isVerified: true,
+    caption: 'test url video',
+    url: 'https://www.youtube.com/watch?v=sAuEeM_6zpk',
+    time: '7:10 PM',
+    date: '02/02/2026',
+    views: '2.2K',
+    category: 'projects',
   },
 ];
 
@@ -71,9 +85,22 @@ function renderCaption(text: string) {
   });
 }
 
+function getYouTubeEmbed(url: string) {
+  const regExp = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/;
+  const match = url.match(regExp);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+}
+
+function isImage(url: string) {
+  return /\.(jpg|jpeg|png|webp|gif)$/i.test(url);
+}
+
 export default function ContentArea({ activeTab }: ContentAreaProps) {
   const filteredPosts = posts.filter(
-    (post) => activeTab === 'all' || post.category === activeTab || post.category === 'all'
+    (post) =>
+      activeTab === 'all' ||
+      post.category === activeTab ||
+      post.category === 'all'
   );
 
   return (
@@ -130,15 +157,23 @@ export default function ContentArea({ activeTab }: ContentAreaProps) {
                 </p>
               </div>
 
-              {/* Image */}
-              {post.imageUrl && (
+              {/* Media */}
+              {post.url && (
                 <div className="mb-3">
                   <div className="rounded-2xl overflow-hidden border border-[var(--border-color)]">
-                    <img
-                      src={post.imageUrl}
-                      alt="Post content"
-                      className="w-full h-auto max-h-80 object-cover"
-                    />
+                    {getYouTubeEmbed(post.url) ? (
+                      <iframe
+                        src={getYouTubeEmbed(post.url)!}
+                        className="w-full h-80"
+                        allowFullScreen
+                      />
+                    ) : isImage(post.url) ? (
+                      <img
+                        src={post.url}
+                        alt="Post content"
+                        className="w-full h-auto max-h-80 object-cover"
+                      />
+                    ) : null}
                   </div>
                 </div>
               )}

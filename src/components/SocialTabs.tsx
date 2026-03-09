@@ -10,8 +10,8 @@ interface SocialTabsProps {
 }
 
 const tabs = [
-  { id: 'all' as Tab, label: 'All Posts', count: 2 },
-  { id: 'projects' as Tab, label: 'Projects', count: 1 },
+  { id: 'all' as Tab, label: 'All Posts', count: 3 },
+  { id: 'projects' as Tab, label: 'Projects', count: 2 },
   { id: 'designs' as Tab, label: 'Designs', count: 1 },
 ];
 
