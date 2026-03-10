@@ -49,9 +49,9 @@ export default function ProfileCard({
           alt="Cover"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
         
-        {/* Dark Mode Toggle - Positioned on Cover */}
+        {/* Top Right - Dark Mode Toggle */}
         <button
           aria-label="Toggle dark mode"
           onClick={onToggleTheme}
@@ -60,11 +60,60 @@ export default function ProfileCard({
           <FaSun className={!isDarkMode ? '' : 'hidden'} />
           <FaMoon className={isDarkMode ? '' : 'hidden'} />
         </button>
+
+        {/* Bottom Right - Social Links */}
+        {links && (
+          <div className="absolute bottom-4 right-4 flex items-center gap-2">
+            {links.website && (
+              <a
+                href={links.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black/40 backdrop-blur-md w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+              >
+                <FaGlobe size={16} />
+              </a>
+            )}
+
+            {links.github && (
+              <a
+                href={links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black/40 backdrop-blur-md w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+              >
+                <FaGithub size={16} />
+              </a>
+            )}
+
+            {links.twitter && (
+              <a
+                href={links.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black/40 backdrop-blur-md w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+              >
+                <FaXTwitter size={16} />
+              </a>
+            )}
+
+            {links.tiktok && (
+              <a
+                href={links.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black/40 backdrop-blur-md w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+              >
+                <FaTiktok size={16} />
+              </a>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Profile Info */}
       <div className="px-4 pb-6 relative">
-        {/* Avatar  */}
+        {/* Avatar */}
         <div className="relative -mt-16 mb-4">
           <div className="w-32 h-32 rounded-full border-4 border-[var(--body-color)] overflow-hidden card-color shadow-xl">
             <img
@@ -95,59 +144,9 @@ export default function ProfileCard({
         </div>
 
         {/* Bio */}
-        <p className="text-fill-color/80 text-base leading-relaxed mb-4">
+        <p className="text-fill-color/80 text-base leading-relaxed">
           {bio}
         </p>
-
-       {/* Social Links */}
-        {links && (
-          <div className="flex items-center gap-3 flex-wrap">
-            
-            {links.website && (
-              <a
-                href={links.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-color w-10 h-10 rounded-full border border-color flex items-center justify-center text-fill-color/70 hover:text-fill-color hover:scale-110 transition-all duration-200"
-              >
-                <FaGlobe size={18} />
-              </a>
-            )}
-
-            {links.github && (
-              <a
-                href={links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-color w-10 h-10 rounded-full border border-color flex items-center justify-center text-fill-color/70 hover:text-fill-color hover:scale-110 transition-all duration-200"
-              >
-                <FaGithub size={18} />
-              </a>
-            )}
-
-            {links.twitter && (
-              <a
-                href={links.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-color w-10 h-10 rounded-full border border-color flex items-center justify-center text-fill-color/70 hover:text-fill-color hover:scale-110 transition-all duration-200"
-              >
-                <FaXTwitter size={18} />
-              </a>
-            )}
-
-            {links.tiktok && (
-              <a
-                href={links.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-color w-10 h-10 rounded-full border border-color flex items-center justify-center text-fill-color/70 hover:text-fill-color hover:scale-110 transition-all duration-200"
-              >
-                <FaTiktok size={18} />
-              </a>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );
