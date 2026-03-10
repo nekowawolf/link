@@ -1,8 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-
-type Tab = 'all' | 'projects' | 'designs';
+type Tab = 'all' | 'AI Prompts' | 'Templates' | 'projects';
 
 interface SocialTabsProps {
   activeTab: Tab;
@@ -11,20 +9,21 @@ interface SocialTabsProps {
 
 const tabs = [
   { id: 'all' as Tab, label: 'All Posts', count: 3 },
-  { id: 'projects' as Tab, label: 'Projects', count: 2 },
-  { id: 'designs' as Tab, label: 'Designs', count: 1 },
+  { id: 'AI Prompts' as Tab, label: 'AI Prompts', count: 1 },
+  { id: 'Templates' as Tab, label: 'Templates', count: 1 },
+  { id: 'projects' as Tab, label: 'Projects', count: 1 },
 ];
 
 export default function SocialTabs({ activeTab, onTabChange }: SocialTabsProps) {
   return (
     <div className="border-divider-b">
-      <div className="flex">
+      <div className="flex overflow-x-auto scrollbar-hide">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             className={`
-              relative flex-1 py-4 px-4 text-sm font-medium transition-all duration-200
+              relative min-w-[33.33%] py-4 px-4 text-sm font-medium transition-all duration-200
               ${activeTab === tab.id 
                 ? 'text-fill-color' 
                 : 'text-fill-color/60 hover:text-fill-color/80 hover:bg-[var(--card-color2)]'
@@ -43,10 +42,9 @@ export default function SocialTabs({ activeTab, onTabChange }: SocialTabsProps) 
                 {tab.count}
               </span>
             </span>
-            
-            {/* Active Indicator */}
+
             {activeTab === tab.id && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 rounded-full animate-in slide-in-from-left duration-200" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 rounded-full" />
             )}
           </button>
         ))}

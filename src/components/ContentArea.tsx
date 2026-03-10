@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { IoCheckmarkCircle } from "react-icons/io5";
 
-type Tab = 'all' | 'projects' | 'designs';
+type Tab = 'all' | 'AI Prompts' | 'Templates' | 'projects';
 
 interface ContentAreaProps {
   activeTab: Tab;
@@ -34,7 +34,7 @@ const posts: TweetPost[] = [
     time: '8:30 PM',
     date: '08/03/2026',
     views: '12.5K',
-    category: 'projects',
+    category: 'AI Prompts',
   },
   {
     id: 2,
@@ -47,7 +47,7 @@ const posts: TweetPost[] = [
     time: '6:10 PM',
     date: '07/03/2026',
     views: '8.2K',
-    category: 'designs',
+    category: 'Templates',
   },
   {
     id: 3,

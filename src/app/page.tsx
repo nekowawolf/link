@@ -5,7 +5,7 @@ import ProfileCard from '@/components/ProfileCard';
 import SocialTabs from '@/components/SocialTabs';
 import ContentArea from '@/components/ContentArea';
 
-type Tab = 'all' | 'projects' | 'designs';
+type Tab = 'all' | 'AI Prompts' | 'Templates' | 'projects';
 
 
 export default function HomePage() {
