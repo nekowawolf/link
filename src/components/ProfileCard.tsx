@@ -55,7 +55,7 @@ export default function ProfileCard({
         <button
           aria-label="Toggle dark mode"
           onClick={onToggleTheme}
-          className="absolute top-4 right-4 card-color w-10 h-10 text-fill-color rounded-full border border-color flex items-center justify-center text-lg hover:opacity-80 transition-all duration-200 cursor-pointer shadow-lg backdrop-blur-sm"
+          className="absolute top-4 right-4 card-color w-8 h-8 sm:w-9 sm:h-9 text-fill-color rounded-full border border-color flex items-center justify-center text-lg hover:opacity-80 transition-all duration-200 cursor-pointer shadow-lg backdrop-blur-sm"
         >
           <FaSun className={!isDarkMode ? '' : 'hidden'} />
           <FaMoon className={isDarkMode ? '' : 'hidden'} />
@@ -69,9 +69,9 @@ export default function ProfileCard({
                 href={links.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-black/40 backdrop-blur-md w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+                className="bg-black/40 backdrop-blur-md w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
               >
-                <FaGlobe size={16} />
+                <FaGlobe className="text-sm sm:text-base" />
               </a>
             )}
 
@@ -80,9 +80,9 @@ export default function ProfileCard({
                 href={links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-black/40 backdrop-blur-md w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+                className="bg-black/40 backdrop-blur-md w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
               >
-                <FaGithub size={16} />
+                <FaGithub className="text-sm sm:text-base" />
               </a>
             )}
 
@@ -91,9 +91,9 @@ export default function ProfileCard({
                 href={links.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-black/40 backdrop-blur-md w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+                className="bg-black/40 backdrop-blur-md w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
               >
-                <FaXTwitter size={16} />
+                <FaXTwitter className="text-sm sm:text-base" />
               </a>
             )}
 
@@ -102,9 +102,9 @@ export default function ProfileCard({
                 href={links.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-black/40 backdrop-blur-md w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+                className="bg-black/40 backdrop-blur-md w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
               >
-                <FaTiktok size={16} />
+                <FaTiktok className="text-sm sm:text-base" />
               </a>
             )}
           </div>
