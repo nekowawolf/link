@@ -23,7 +23,7 @@ export default function SocialTabs({ activeTab, onTabChange }: SocialTabsProps) 
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             className={`
-              relative min-w-[33.33%] py-4 px-4 text-sm font-medium transition-all duration-200
+              relative py-4 px-4 text-sm font-medium transition-all duration-200 whitespace-nowrap
               ${activeTab === tab.id 
                 ? 'text-fill-color' 
                 : 'text-fill-color/60 hover:text-fill-color/80 hover:bg-[var(--card-color2)]'
@@ -44,7 +44,7 @@ export default function SocialTabs({ activeTab, onTabChange }: SocialTabsProps) 
             </span>
 
             {activeTab === tab.id && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 rounded-full" />
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 h-0.5 bg-blue-500 rounded-full w-[calc(100%-2rem)] max-w-[calc(100%-1rem)]" />
             )}
           </button>
         ))}
