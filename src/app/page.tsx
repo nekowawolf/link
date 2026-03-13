@@ -16,19 +16,7 @@ export default function HomePage() {
       <div className="max-w-md mx-auto w-full">
         <div className="glass-card rounded-2xl overflow-hidden shadow-2xl">
           {/* Profile Section */}
-          <ProfileCard
-            name="nekowawolf"
-            username="nekowawolf"
-            bio="Fullstack developer building scalable web apps, backend services, and UI systems with modern, production ready standards."
-            avatarUrl="https://nekowawolf.github.io/cdn-images/images/2025/1763530019_113094795.jpeg"
-            coverUrl="https://i.pinimg.com/736x/77/81/e2/7781e2e0d509a2ddbb0cb92282e61c38.jpg"
-            links={{
-              github: 'https://github.com/nekowawolf',
-              twitter: 'https://x.com/nekowawolf_',
-              tiktok: 'https://tiktok.com/@nekowawolf',
-              website: 'https://nekowawolf.xyz/',
-            }}
-          />
+          <ProfileCard/>
 
           {/* Social-style Tabs */}
           <SocialTabs activeTab={activeTab} onTabChange={setActiveTab} />

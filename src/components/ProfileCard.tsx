@@ -5,28 +5,21 @@ import { FaSun, FaMoon, FaGithub, FaXTwitter, FaTiktok, FaGlobe } from 'react-ic
 import { IoIosSearch } from "react-icons/io";
 import { toggleDarkMode } from '@/utils/darkmode';
 
-interface ProfileCardProps {
-  name: string;
-  username: string;
-  bio: string;
-  avatarUrl: string;
-  coverUrl?: string;
-  links?: {
-    github?: string;
-    twitter?: string;
-    tiktok?: string;
-    website?: string;
-  };
-}
+export default function ProfileCard() {
 
-export default function ProfileCard({
-  name,
-  username,
-  bio,
-  avatarUrl,
-  coverUrl = 'https://images.unsplash.com/photo-1557683316-973673baf926?w=800&auto=format&fit=crop',
-  links,
-}: ProfileCardProps) {
+  const name = "nekowawolf";
+  const username = "nekowawolf";
+  const bio = "Fullstack developer building scalable web apps, backend services, and UI systems with modern, production ready standards.";
+  const avatarUrl = "https://nekowawolf.github.io/cdn-images/images/2025/1763530019_113094795.jpeg";
+  const coverUrl = "https://i.pinimg.com/736x/77/81/e2/7781e2e0d509a2ddbb0cb92282e61c38.jpg";
+
+  const links = {
+    github: 'https://github.com/nekowawolf',
+    twitter: 'https://x.com/nekowawolf_',
+    tiktok: 'https://tiktok.com/@nekowawolf',
+    website: 'https://nekowawolf.xyz/',
+  };
+
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -50,7 +43,7 @@ export default function ProfileCard({
           alt="Cover"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50 pointer-events-none" />
         
         {/* Top Right - Dark Mode Toggle */}
         <button
@@ -64,13 +57,13 @@ export default function ProfileCard({
 
         {/* Bottom Right - Social Links */}
         {links && (
-          <div className="absolute bottom-4 right-4 flex items-center gap-2">
+          <div className="absolute bottom-2 right-4 z-10 flex items-center gap-2">
             {links.website && (
               <a
                 href={links.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-black/40 backdrop-blur-md w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
               >
                 <FaGlobe className="text-sm sm:text-base" />
               </a>
@@ -81,7 +74,7 @@ export default function ProfileCard({
                 href={links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-black/40 backdrop-blur-md w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
               >
                 <FaGithub className="text-sm sm:text-base" />
               </a>
@@ -92,7 +85,7 @@ export default function ProfileCard({
                 href={links.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-black/40 backdrop-blur-md w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
               >
                 <FaXTwitter className="text-sm sm:text-base" />
               </a>
@@ -103,7 +96,7 @@ export default function ProfileCard({
                 href={links.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-black/40 backdrop-blur-md w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/20 flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 hover:scale-110 transition-all duration-200"
+                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
               >
                 <FaTiktok className="text-sm sm:text-base" />
               </a>
