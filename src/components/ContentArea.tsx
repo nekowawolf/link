@@ -28,6 +28,19 @@ const posts: TweetPost[] = [
     username: 'nekowawolf',
     isVerified: true,
     caption:
+      'Ethereal Gate \n\nLink: https://www.greenfoot.org/scenarios/36166',
+    url: 'https://nekowawolf.github.io/cdn-images/images/2026/1773590789_Screenshot%202026-03-15%20231137.png',
+    time: '10:00 PM',
+    date: '15/03/2026',
+    views: '3.1K',
+    category: 'projects',
+  },
+  {
+    id: 1,
+    name: 'nekowawolf',
+    username: 'nekowawolf',
+    isVerified: true,
+    caption:
       '3D Model Mouse Interaction Tutorial \n\nLink: https://lynk.id/nekowawolf/l9w9391l0kk2',
     url: 'https://nekowawolf.github.io/cdn-images/images/2026/1773012524_3d.png',
     time: '8:30 PM',
