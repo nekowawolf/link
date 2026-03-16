@@ -7,6 +7,7 @@ type Tab = 'all' | 'AI Prompts' | 'Templates' | 'projects';
 
 interface ContentAreaProps {
   activeTab: Tab;
+  searchQuery: string;
 }
 
 interface TweetPost {
@@ -108,23 +109,29 @@ function isImage(url: string) {
   return /\.(jpg|jpeg|png|webp|gif)$/i.test(url);
 }
 
-export default function ContentArea({ activeTab }: ContentAreaProps) {
+export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps) {
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const filteredPosts = posts.filter(
-    (post) =>
+  const filteredPosts = posts.filter((post) => {
+
+    const matchesTab =
       activeTab === 'all' ||
       post.category === activeTab ||
-      post.category === 'all'
-  );
+      post.category === 'all';
+
+    const matchesSearch =
+      post.caption.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesTab && matchesSearch;
+  });
 
   return (
     <>
       <div className="h-[500px] overflow-y-auto">
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeTab}
+            key={activeTab + searchQuery}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -214,6 +221,13 @@ export default function ContentArea({ activeTab }: ContentAreaProps) {
                 </div>
               </article>
             ))}
+
+            {filteredPosts.length === 0 && (
+              <div className="p-6 text-center text-fill-color/50">
+                No posts found
+              </div>
+            )}
+
           </motion.div>
         </AnimatePresence>
       </div>
