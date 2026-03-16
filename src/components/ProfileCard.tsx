@@ -9,7 +9,7 @@ export default function ProfileCard() {
 
   const name = "nekowawolf";
   const username = "nekowawolf";
-  const bio = "Fullstack developer building scalable web apps, backend services, and UI systems with modern, production ready standards.";
+  const bio = "Professional Coder (powered by AI)";
   const avatarUrl = "https://nekowawolf.github.io/cdn-images/images/2025/1763530019_113094795.jpeg";
   const coverUrl = "https://i.pinimg.com/736x/77/81/e2/7781e2e0d509a2ddbb0cb92282e61c38.jpg";
 
