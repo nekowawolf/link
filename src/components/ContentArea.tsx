@@ -25,7 +25,20 @@ interface TweetPost {
 
 const posts: TweetPost[] = [
   {
-    id: 1,
+    id: 5,
+    name: 'nekowawolf',
+    username: 'nekowawolf',
+    isVerified: true,
+    caption:
+      'Ethereal Gate asset game pack \n\nLink: https://lynk.id/nekowawolf/q4w3d0k30y5w',
+    url: 'https://nekowawolf.github.io/cdn-images/images/2026/1775047721_pixel.png',
+    time: '7:00 PM',
+    date: '01/04/2026',
+    views: '6.3K',
+    category: 'Templates',
+  },
+  {
+    id: 4,
     name: 'nekowawolf',
     username: 'nekowawolf',
     isVerified: true,
@@ -38,7 +51,7 @@ const posts: TweetPost[] = [
     category: 'projects',
   },
   {
-    id: 1,
+    id: 3,
     name: 'nekowawolf',
     username: 'nekowawolf',
     isVerified: true,
@@ -64,7 +77,7 @@ const posts: TweetPost[] = [
     category: 'Templates',
   },
   {
-    id: 3,
+    id: 1,
     name: 'nekowawolf',
     username: 'nekowawolf',
     isVerified: true,

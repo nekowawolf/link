@@ -8,9 +8,9 @@ interface SocialTabsProps {
 }
 
 const tabs = [
-  { id: 'all' as Tab, label: 'All Posts', count: 4 },
+  { id: 'all' as Tab, label: 'All Posts', count: 5 },
   { id: 'AI Prompts' as Tab, label: 'AI Prompts', count: 1 },
-  { id: 'Templates' as Tab, label: 'Templates', count: 1 },
+  { id: 'Templates' as Tab, label: 'Templates', count: 2 },
   { id: 'projects' as Tab, label: 'Projects', count: 2 },
 ];
 
