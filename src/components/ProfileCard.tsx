@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { FaSun, FaMoon, FaGithub, FaXTwitter, FaTiktok, FaGlobe } from 'react-icons/fa6';
+import { FaSun, FaMoon, FaGithub, FaXTwitter, FaTiktok, FaGlobe, FaInstagram } from 'react-icons/fa6';
 import { IoIosSearch } from "react-icons/io";
 import { toggleDarkMode } from '@/utils/darkmode';
 
@@ -17,15 +17,16 @@ export default function ProfileCard({
 
   const name = "nekowawolf";
   const username = "nekowawolf";
-  const bio = "Professional Coder (powered by AI)";
+  const bio = "Professional Coder (vibe coding)";
   const avatarUrl = "https://nekowawolf.github.io/cdn-images/images/2025/1763530019_113094795.jpeg";
-  const coverUrl = "https://i.pinimg.com/736x/77/81/e2/7781e2e0d509a2ddbb0cb92282e61c38.jpg";
+  const coverUrl = "https://nekowawolf.github.io/cdn-images/images/2026/1775599464_bg_link.png";
 
   const links = {
-    github: 'https://github.com/nekowawolf',
+    github: 'https://github.com/nekowawolf',  
     twitter: 'https://x.com/nekowawolf_',
     tiktok: 'https://tiktok.com/@nekowawolf',
     website: 'https://nekowawolf.xyz/',
+    instagram: 'https://instagram.com/nekowawolf',
   };
 
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -96,6 +97,17 @@ export default function ProfileCard({
                 className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
               >
                 <FaXTwitter className="text-sm sm:text-base" />
+              </a>
+            )}
+
+            {links.instagram && (
+              <a
+                href={links.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
+              >
+                <FaInstagram className="text-sm sm:text-base" />
               </a>
             )}
 
