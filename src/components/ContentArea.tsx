@@ -1,7 +1,9 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { useLinkData } from '@/hooks/useLinkData';
+import Image from "next/image";
 
 type Tab = 'all' | 'AI Prompts' | 'Templates' | 'projects';
 
@@ -10,90 +12,11 @@ interface ContentAreaProps {
   searchQuery: string;
 }
 
-interface TweetPost {
-  id: number;
-  name: string;
-  username: string;
-  isVerified: boolean;
-  caption: string;
-  url?: string;
-  time: string;
-  date: string;
-  views: string;
-  category: Tab | 'all';
-}
-
-const posts: TweetPost[] = [
-  {
-    id: 5,
-    name: 'nekowawolf',
-    username: 'nekowawolf',
-    isVerified: true,
-    caption:
-      'Ethereal Gate asset game pack \n\nLink: https://lynk.id/nekowawolf/q4w3d0k30y5w',
-    url: 'https://nekowawolf.github.io/cdn-images/images/2026/1775047721_pixel.png',
-    time: '7:00 PM',
-    date: '01/04/2026',
-    views: '6.3K',
-    category: 'Templates',
-  },
-  {
-    id: 4,
-    name: 'nekowawolf',
-    username: 'nekowawolf',
-    isVerified: true,
-    caption:
-      'Ethereal Gate \n\nLink: https://www.greenfoot.org/scenarios/36166',
-    url: 'https://nekowawolf.github.io/cdn-images/images/2026/1773590789_Screenshot%202026-03-15%20231137.png',
-    time: '10:00 PM',
-    date: '15/03/2026',
-    views: '3.1K',
-    category: 'projects',
-  },
-  {
-    id: 3,
-    name: 'nekowawolf',
-    username: 'nekowawolf',
-    isVerified: true,
-    caption:
-      '3D Model Mouse Interaction Tutorial \n\nLink: https://lynk.id/nekowawolf/l9w9391l0kk2',
-    url: 'https://nekowawolf.github.io/cdn-images/images/2026/1773012524_3d.png',
-    time: '8:30 PM',
-    date: '08/03/2026',
-    views: '12.5K',
-    category: 'AI Prompts',
-  },
-  {
-    id: 2,
-    name: 'nekowawolf',
-    username: 'nekowawolf',
-    isVerified: true,
-    caption:
-      'web ini sepenuhnya belum selesai, selesai gk selesai yang penting production',
-    url: 'https://i.pinimg.com/736x/ea/31/70/ea3170757b604c874728307393950f0f.jpg',
-    time: '6:10 PM',
-    date: '07/03/2026',
-    views: '8.2K',
-    category: 'Templates',
-  },
-  {
-    id: 1,
-    name: 'nekowawolf',
-    username: 'nekowawolf',
-    isVerified: true,
-    caption: 'test url video',
-    url: 'https://www.youtube.com/watch?v=sAuEeM_6zpk',
-    time: '7:10 PM',
-    date: '02/02/2026',
-    views: '2.2K',
-    category: 'projects',
-  },
-];
-
 function renderCaption(text: string) {
   const urlRegex = /(https?:\/\/[^\s]+)/g;
-
-  return text.split(urlRegex).map((part, index) => {
+  const parts = text.split(urlRegex);
+  
+  return parts.map((part, index) => {
     if (part.match(urlRegex)) {
       return (
         <a
@@ -107,7 +30,6 @@ function renderCaption(text: string) {
         </a>
       );
     }
-
     return part;
   });
 }
@@ -123,21 +45,50 @@ function isImage(url: string) {
 }
 
 export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps) {
-
+  const { posts, loading, error } = useLinkData();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const filteredPosts = posts.filter((post) => {
+  const filteredPosts = useMemo(() => {
+    if (!posts.length) return [];
+    
+    return posts.filter((post) => {
+      const matchesTab = activeTab === 'all' || post.category === activeTab;
+      const matchesSearch = post.caption.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesTab && matchesSearch;
+    });
+  }, [posts, activeTab, searchQuery]);
 
-    const matchesTab =
-      activeTab === 'all' ||
-      post.category === activeTab ||
-      post.category === 'all';
+  if (loading) {
+    return (
+      <div className="h-[500px] overflow-y-auto">
+        <div className="p-4 space-y-4">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="animate-pulse">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-11 h-11 rounded-full bg-gray-600" />
+                <div className="flex-1">
+                  <div className="h-4 w-32 bg-gray-600 rounded mb-2" />
+                  <div className="h-3 w-24 bg-gray-600 rounded" />
+                </div>
+              </div>
+              <div className="h-20 bg-gray-600 rounded mb-3" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
-    const matchesSearch =
-      post.caption.toLowerCase().includes(searchQuery.toLowerCase());
-
-    return matchesTab && matchesSearch;
-  });
+  if (error) {
+    return (
+      <div className="h-[500px] flex items-center justify-center">
+        <div className="text-red-500 text-center">
+          <p>Failed to load posts</p>
+          <p className="text-sm mt-2">{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -153,7 +104,7 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
           >
             {filteredPosts.map((post) => (
               <article
-                key={post.id}
+                key={post._id}
                 className="p-4 hover:bg-[var(--card-color2)] transition-colors duration-200 cursor-pointer"
               >
                 {/* Header */}
@@ -174,7 +125,7 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
                         {post.name}
                       </span>
 
-                      {post.isVerified && (
+                      {post.is_verified && (
                         <svg
                           className="w-4 h-4 text-blue-500 flex-shrink-0"
                           fill="currentColor"
@@ -206,7 +157,6 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
                 {post.url && (
                   <div className="mb-3">
                     <div className="rounded-2xl overflow-hidden border border-[var(--border-color)]">
-
                       {getYouTubeEmbed(post.url) ? (
                         <iframe
                           src={getYouTubeEmbed(post.url)!}
@@ -214,33 +164,40 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
                           allowFullScreen
                         />
                       ) : isImage(post.url) ? (
-
                         <img
                           src={post.url}
                           alt="Post content"
                           onClick={() => setSelectedImage(post.url!)}
                           className="w-full h-auto max-h-80 object-cover cursor-zoom-in"
                         />
-
                       ) : null}
-
                     </div>
                   </div>
                 )}
 
                 {/* Footer */}
                 <div className="text-gray-500 text-[13px]">
-                  {post.time} • {post.date} • {post.views} views
+                  {new Date(post.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} •{' '}
+                  {new Date(post.created_at).toLocaleDateString()} •{' '}
+                  {post.views >= 1000 
+                    ? `${(post.views / 1000).toFixed(1)}K` 
+                    : post.views} views
                 </div>
               </article>
             ))}
 
-            {filteredPosts.length === 0 && (
-              <div className="p-6 text-center text-fill-color/50">
-                No posts found
+            {filteredPosts.length === 0 ? (
+              <div className="text-center py-10">
+                <Image
+                  src="https://nekowawolf.github.io/cdn-images/images/2026/1771661079_pixchan.png"
+                  alt="No posts found"
+                  width={176}
+                  height={176}
+                  className="mx-auto"
+                />
+                <p className="text-gray-500 mt-4">No posts found.</p>
               </div>
-            )}
-
+            ) : null}
           </motion.div>
         </AnimatePresence>
       </div>

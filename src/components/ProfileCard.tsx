@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { FaSun, FaMoon, FaGithub, FaXTwitter, FaTiktok, FaGlobe, FaInstagram } from 'react-icons/fa6';
 import { IoIosSearch } from "react-icons/io";
 import { toggleDarkMode } from '@/utils/darkmode';
+import { useLinkData } from '@/hooks/useLinkData';
 
 interface ProfileCardProps {
   searchQuery: string;
@@ -14,27 +15,11 @@ export default function ProfileCard({
   searchQuery,
   onSearchChange,
 }: ProfileCardProps) {
-
-  const name = "nekowawolf";
-  const username = "nekowawolf";
-  const bio = "Professional Coder (vibe coding)";
-  const avatarUrl = "https://nekowawolf.github.io/cdn-images/images/2025/1763530019_113094795.jpeg";
-  const coverUrl = "https://nekowawolf.github.io/cdn-images/images/2026/1775599464_bg_link.png";
-
-  const links = {
-    github: 'https://github.com/nekowawolf',  
-    twitter: 'https://x.com/nekowawolf_',
-    tiktok: 'https://tiktok.com/@nekowawolf',
-    website: 'https://nekowawolf.xyz/',
-    instagram: 'https://instagram.com/nekowawolf',
-  };
-
+  const { profile, loading, error } = useLinkData();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const current =
-      typeof window !== 'undefined' &&
-      localStorage.getItem('darkmode') === 'active';
+    const current = typeof window !== 'undefined' && localStorage.getItem('darkmode') === 'active';
     setIsDarkMode(current);
   }, []);
 
@@ -43,12 +28,52 @@ export default function ProfileCard({
     setIsDarkMode((v) => !v);
   };
 
+  if (loading) {
+    return (
+      <div className="relative">
+        <div className="h-32 sm:h-40 w-full rounded-t-2xl bg-gray-700 animate-pulse" />
+        <div className="px-4 pb-6 relative">
+          <div className="relative -mt-16 mb-4">
+            <div className="w-32 h-32 rounded-full border-4 border-[var(--body-color)] bg-gray-600 animate-pulse" />
+          </div>
+          <div className="h-8 w-48 bg-gray-600 rounded animate-pulse mb-3" />
+          <div className="h-16 w-full bg-gray-600 rounded animate-pulse" />
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-4 text-center text-red-500">
+        Failed to load profile: {error}
+      </div>
+    );
+  }
+
+  const defaultProfile = {
+    name: 'nekowawolf',
+    username: 'nekowawolf',
+    bio: 'Professional Coder (vibe coding)',
+    avatar_url: 'https://nekowawolf.github.io/cdn-images/images/2025/1763530019_113094795.jpeg',
+    cover_url: 'https://nekowawolf.github.io/cdn-images/images/2026/1775599464_bg_link.png',
+    links: {
+      github: 'https://github.com/nekowawolf',
+      twitter: 'https://x.com/nekowawolf_',
+      tiktok: 'https://tiktok.com/@nekowawolf',
+      website: 'https://nekowawolf.xyz/',
+      instagram: 'https://instagram.com/nekowawolf',
+    },
+  };
+
+  const data = profile || defaultProfile;
+
   return (
     <div className="relative">
       {/* Cover Image */}
       <div className="h-32 sm:h-40 w-full overflow-hidden rounded-t-2xl relative">
         <img
-          src={coverUrl}
+          src={data.cover_url}
           alt="Cover"
           className="w-full h-full object-cover"
         />
@@ -65,11 +90,11 @@ export default function ProfileCard({
         </button>
 
         {/* Bottom Right - Social Links */}
-        {links && (
+        {data.links && (
           <div className="absolute bottom-2 right-4 z-10 flex items-center gap-2">
-            {links.website && (
+            {data.links.website && (
               <a
-                href={links.website}
+                href={data.links.website}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
@@ -78,9 +103,9 @@ export default function ProfileCard({
               </a>
             )}
 
-            {links.github && (
+            {data.links.github && (
               <a
-                href={links.github}
+                href={data.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
@@ -89,9 +114,9 @@ export default function ProfileCard({
               </a>
             )}
 
-            {links.twitter && (
+            {data.links.twitter && (
               <a
-                href={links.twitter}
+                href={data.links.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
@@ -100,9 +125,9 @@ export default function ProfileCard({
               </a>
             )}
 
-            {links.instagram && (
+            {data.links.instagram && (
               <a
-                href={links.instagram}
+                href={data.links.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
@@ -111,9 +136,9 @@ export default function ProfileCard({
               </a>
             )}
 
-            {links.tiktok && (
+            {data.links.tiktok && (
               <a
-                href={links.tiktok}
+                href={data.links.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
@@ -131,8 +156,8 @@ export default function ProfileCard({
         <div className="relative -mt-16 mb-4">
           <div className="w-32 h-32 rounded-full border-4 border-[var(--body-color)] overflow-hidden card-color shadow-xl">
             <img
-              src={avatarUrl}
-              alt={name}
+              src={data.avatar_url}
+              alt={data.name}
               className="w-full h-full object-cover"
             />
           </div>
@@ -141,7 +166,7 @@ export default function ProfileCard({
         {/* Name & Username */}
         <div className="mb-3">
           <h1 className="text-2xl font-bold text-fill-color flex items-center gap-2">
-            {name}
+            {data.name}
             <svg 
               className="w-5 h-5 text-blue-500" 
               fill="currentColor" 
@@ -154,13 +179,13 @@ export default function ProfileCard({
               />
             </svg>
           </h1>
-          <p className="text-fill-color/60 font-medium">@{username}</p>
+          <p className="text-fill-color/60 font-medium">@{data.username}</p>
         </div>
 
         {/* Bio & Search */}
         <div className="space-y-4">
           <p className="text-fill-color/80 text-base leading-relaxed">
-            {bio}
+            {data.bio}
           </p>
           
           {/* Search Bar */}
@@ -171,7 +196,7 @@ export default function ProfileCard({
               placeholder="Search posts..."
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[var(--card-color2)] border border-[var(--border-color)] text-fill-color text-sm placeholder:text-fill-color/40 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[var(--card-color2)] border border-[var(--border-color)] text-fill-color text-sm placeholder:text-fill-color/40 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
         </div>
