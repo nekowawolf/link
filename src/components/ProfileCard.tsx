@@ -30,7 +30,7 @@ export default function ProfileCard({
   searchQuery,
   onSearchChange,
 }: ProfileCardProps) {
-  const { profile } = useLinkData();
+  const { profile, loading } = useLinkData();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -44,6 +44,49 @@ export default function ProfileCard({
   };
 
   const data = profile || defaultProfile;
+
+  if (loading) {
+    return (
+      <div className="relative">
+        {/* Cover Image Skeleton */}
+        <div className="h-32 sm:h-40 w-full rounded-t-2xl bg-gray-700 animate-pulse" />
+        
+        {/* Top Right - Dark Mode Toggle Skeleton */}
+        <div className="absolute top-4 right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-600 animate-pulse" />
+        
+        {/* Bottom Right - Social Links Skeleton */}
+        <div className="absolute bottom-72 right-4 z-10 flex items-center gap-4">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gray-600/50 animate-pulse" />
+          ))}
+        </div>
+
+        {/* Profile Info Skeleton */}
+        <div className="px-4 pb-6 relative">
+          <div className="relative -mt-16 mb-4">
+            <div className="w-32 h-32 rounded-full border-4 border-[var(--body-color)] bg-gray-600 animate-pulse" />
+          </div>
+          
+          {/* Name Skeleton */}
+          <div className="mb-3">
+            <div className="h-8 w-48 bg-gray-600 rounded animate-pulse mb-2" />
+            <div className="h-5 w-32 bg-gray-600/60 rounded animate-pulse" />
+          </div>
+          
+          {/* Bio Skeleton */}
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <div className="h-4 w-full bg-gray-600 rounded animate-pulse" />
+              <div className="h-4 w-3/4 bg-gray-600 rounded animate-pulse" />
+            </div>
+            
+            {/* Search Bar Skeleton */}
+            <div className="h-11 w-full bg-gray-600 rounded-xl animate-pulse" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative">
