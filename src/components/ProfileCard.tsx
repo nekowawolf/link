@@ -11,11 +11,26 @@ interface ProfileCardProps {
   onSearchChange: (value: string) => void;
 }
 
+const defaultProfile = {
+  name: 'nekowawolf',
+  username: 'nekowawolf',
+  bio: 'Professional Coder (vibe coding)',
+  avatar_url: 'https://nekowawolf.github.io/cdn-images/images/2025/1763530019_113094795.jpeg',
+  cover_url: 'https://nekowawolf.github.io/cdn-images/images/2026/1775599464_bg_link.png',
+  links: {
+    github: 'https://github.com/nekowawolf',
+    twitter: 'https://x.com/nekowawolf_',
+    tiktok: 'https://tiktok.com/@nekowawolf',
+    website: 'https://nekowawolf.xyz/',
+    instagram: 'https://instagram.com/nekowawolf',
+  },
+};
+
 export default function ProfileCard({
   searchQuery,
   onSearchChange,
 }: ProfileCardProps) {
-  const { profile, loading, error } = useLinkData();
+  const { profile } = useLinkData();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -26,44 +41,6 @@ export default function ProfileCard({
   const onToggleTheme = () => {
     toggleDarkMode();
     setIsDarkMode((v) => !v);
-  };
-
-  if (loading) {
-    return (
-      <div className="relative">
-        <div className="h-32 sm:h-40 w-full rounded-t-2xl bg-gray-700 animate-pulse" />
-        <div className="px-4 pb-6 relative">
-          <div className="relative -mt-16 mb-4">
-            <div className="w-32 h-32 rounded-full border-4 border-[var(--body-color)] bg-gray-600 animate-pulse" />
-          </div>
-          <div className="h-8 w-48 bg-gray-600 rounded animate-pulse mb-3" />
-          <div className="h-16 w-full bg-gray-600 rounded animate-pulse" />
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="p-4 text-center text-red-500">
-        Failed to load profile: {error}
-      </div>
-    );
-  }
-
-  const defaultProfile = {
-    name: 'nekowawolf',
-    username: 'nekowawolf',
-    bio: 'Professional Coder (vibe coding)',
-    avatar_url: 'https://nekowawolf.github.io/cdn-images/images/2025/1763530019_113094795.jpeg',
-    cover_url: 'https://nekowawolf.github.io/cdn-images/images/2026/1775599464_bg_link.png',
-    links: {
-      github: 'https://github.com/nekowawolf',
-      twitter: 'https://x.com/nekowawolf_',
-      tiktok: 'https://tiktok.com/@nekowawolf',
-      website: 'https://nekowawolf.xyz/',
-      instagram: 'https://instagram.com/nekowawolf',
-    },
   };
 
   const data = profile || defaultProfile;

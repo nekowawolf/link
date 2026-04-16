@@ -51,11 +51,13 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
   const filteredPosts = useMemo(() => {
     if (!posts.length) return [];
     
-    return posts.filter((post) => {
+    let filtered = posts.filter((post) => {
       const matchesTab = activeTab === 'all' || post.category === activeTab;
       const matchesSearch = post.caption.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesTab && matchesSearch;
     });
+    
+    return filtered.reverse();
   }, [posts, activeTab, searchQuery]);
 
   if (loading) {
@@ -178,10 +180,7 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
                 {/* Footer */}
                 <div className="text-gray-500 text-[13px]">
                   {new Date(post.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} •{' '}
-                  {new Date(post.created_at).toLocaleDateString()} •{' '}
-                  {post.views >= 1000 
-                    ? `${(post.views / 1000).toFixed(1)}K` 
-                    : post.views} views
+                  {new Date(post.created_at).toLocaleDateString()}
                 </div>
               </article>
             ))}
