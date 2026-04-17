@@ -10,11 +10,10 @@ interface SocialTabsProps {
 }
 
 export default function SocialTabs({ activeTab, onTabChange }: SocialTabsProps) {
-  const { posts } = useLinkData();
+  const { stats } = useLinkData();
 
   const getTabCount = (tabId: Tab): number => {
-    if (tabId === 'all') return posts.length;
-    return posts.filter(post => post.category === tabId).length;
+    return stats[tabId] || 0;
   };
 
   const tabs = [

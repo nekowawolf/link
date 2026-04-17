@@ -1,9 +1,10 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLinkData } from '@/hooks/useLinkData';
 import Image from "next/image";
+import { Spinner } from "@/components/ui/spinner";
 
 type Tab = 'all' | 'AI Prompts' | 'Templates' | 'projects';
 
@@ -45,20 +46,32 @@ function isImage(url: string) {
 }
 
 export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps) {
-  const { posts, loading, error } = useLinkData();
+  const { posts, loading, error, loadMore, loadingMore, hasMore } = useLinkData(activeTab, searchQuery);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const observerTarget = useRef<HTMLDivElement>(null);
 
-  const filteredPosts = useMemo(() => {
-    if (!posts.length) return [];
-    
-    let filtered = posts.filter((post) => {
-      const matchesTab = activeTab === 'all' || post.category === activeTab;
-      const matchesSearch = post.caption.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesTab && matchesSearch;
-    });
-    
-    return filtered.reverse();
-  }, [posts, activeTab, searchQuery]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !loadingMore && !loading) {
+          loadMore();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
+    };
+  }, [hasMore, loadingMore, loading, loadMore]);
+
+  const filteredPosts = posts;
 
   if (loading) {
     return (
@@ -185,7 +198,7 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
               </article>
             ))}
 
-            {filteredPosts.length === 0 ? (
+            {filteredPosts.length === 0 && !loading ? (
               <div className="text-center py-10">
                 <Image
                   src="https://nekowawolf.github.io/cdn-images/images/2026/1771661079_pixchan.png"
@@ -196,6 +209,14 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
                 />
                 <p className="text-gray-500 mt-4">No posts found.</p>
               </div>
+            ) : null}
+
+            {hasMore ? (
+              <div ref={observerTarget} className="py-6 flex justify-center w-full">
+                {loadingMore && <Spinner className="text-fill-color" />}
+              </div>
+            ) : filteredPosts.length > 0 ? (
+                null
             ) : null}
           </motion.div>
         </AnimatePresence>
