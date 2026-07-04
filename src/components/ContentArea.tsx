@@ -25,7 +25,7 @@ function renderCaption(text: string) {
           href={part}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-500 hover:underline"
+          className="text-blue-500 hover:underline cursor-pointer"
         >
           {part}
         </a>
@@ -183,7 +183,7 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
                           src={post.url}
                           alt="Post content"
                           onClick={() => setSelectedImage(post.url!)}
-                          className="w-full h-auto max-h-80 object-cover cursor-zoom-in"
+                          className="w-full h-auto max-h-80 object-cover cursor-pointer"
                         />
                       ) : null}
                     </div>
@@ -226,7 +226,7 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
       <AnimatePresence>
         {selectedImage && (
           <motion.div
-            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

@@ -25,7 +25,7 @@ export default function LinkCard({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block glass-card rounded-xl p-4 card-hover"
+      className="group block glass-card rounded-xl p-4 card-hover cursor-pointer"
     >
       <div className="flex items-start gap-4">
         {/* Icon or Image */}

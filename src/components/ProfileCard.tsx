@@ -117,7 +117,7 @@ export default function ProfileCard({
                 href={data.links.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
+                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200 cursor-pointer"
               >
                 <FaGlobe className="text-sm sm:text-base" />
               </a>
@@ -128,7 +128,7 @@ export default function ProfileCard({
                 href={data.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
+                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200 cursor-pointer"
               >
                 <FaGithub className="text-sm sm:text-base" />
               </a>
@@ -139,7 +139,7 @@ export default function ProfileCard({
                 href={data.links.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
+                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200 cursor-pointer"
               >
                 <FaXTwitter className="text-sm sm:text-base" />
               </a>
@@ -150,7 +150,7 @@ export default function ProfileCard({
                 href={data.links.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
+                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200 cursor-pointer"
               >
                 <FaInstagram className="text-sm sm:text-base" />
               </a>
@@ -161,7 +161,7 @@ export default function ProfileCard({
                 href={data.links.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200"
+                className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-white/80 hover:text-white transition-opacity duration-200 cursor-pointer"
               >
                 <FaTiktok className="text-sm sm:text-base" />
               </a>

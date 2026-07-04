@@ -34,7 +34,7 @@ export default function SocialTabs({ activeTab, onTabChange }: SocialTabsProps) 
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
               className={`
-                relative py-4 px-4 text-sm font-medium transition-all duration-200 whitespace-nowrap
+                relative py-4 px-4 text-sm font-medium transition-all duration-200 whitespace-nowrap cursor-pointer
                 ${activeTab === tab.id 
                   ? 'text-fill-color' 
                   : 'text-fill-color/60 hover:text-fill-color/80 hover:bg-[var(--card-color2)]'
