@@ -3,7 +3,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { useLinkData } from '@/hooks/useLinkData';
-import Image from "next/image";
 import { Spinner } from "@/components/ui/spinner";
 
 type Tab = 'all' | 'AI Prompts' | 'Templates' | 'projects';
@@ -127,7 +126,7 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
                   <div className="flex-shrink-0">
                     <div className="w-11 h-11 rounded-full overflow-hidden border border-[var(--border-color)]">
                       <img
-                        src="https://nekowawolf.github.io/cdn-images/images/2025/1763530019_113094795.jpeg"
+                        src="https://cdn.nekowawolf.xyz/image/2026/1787418464_nekowawolf.webp"
                         alt={post.name}
                         className="w-full h-full object-cover"
                       />
@@ -200,8 +199,8 @@ export default function ContentArea({ activeTab, searchQuery }: ContentAreaProps
 
             {filteredPosts.length === 0 && !loading ? (
               <div className="text-center py-10">
-                <Image
-                  src="https://nekowawolf.github.io/cdn-images/images/2026/1771661079_pixchan.png"
+                <img
+                  src="https://cdn.nekowawolf.xyz/image/2026/1787422427_nwwonee_search.webp"
                   alt="No posts found"
                   width={176}
                   height={176}

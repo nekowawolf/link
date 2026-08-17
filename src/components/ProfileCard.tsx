@@ -15,8 +15,8 @@ const defaultProfile = {
   name: 'nekowawolf',
   username: 'nekowawolf',
   bio: 'Professional Coder (vibe coding)',
-  avatar_url: 'https://nekowawolf.github.io/cdn-images/images/2025/1763530019_113094795.jpeg',
-  cover_url: 'https://nekowawolf.github.io/cdn-images/images/2026/1775599464_bg_link.png',
+  avatar_url: 'https://cdn.nekowawolf.xyz/image/2026/1787418464_nekowawolf.webp',
+  cover_url: 'https://cdn.nekowawolf.xyz/image/2026/1787423456_1775599464_bg_link.webp',
   links: {
     github: 'https://github.com/nekowawolf',
     twitter: 'https://x.com/nekowawolf_',
