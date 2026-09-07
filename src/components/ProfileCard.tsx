@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { FaSun, FaMoon, FaGithub, FaXTwitter, FaTiktok, FaGlobe, FaInstagram } from 'react-icons/fa6';
-import { IoIosSearch } from "react-icons/io";
+import { GoSearch } from "react-icons/go";
 import { toggleDarkMode } from '@/utils/darkmode';
 import { useLinkData } from '@/hooks/useLinkData';
 
@@ -209,14 +209,14 @@ export default function ProfileCard({
           </p>
           
           {/* Search Bar */}
-          <div className="relative">
-            <IoIosSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-fill-color/60" />
+          <div className="relative search-container">
+            <GoSearch className="search-icon absolute left-3 top-1/2 -translate-y-1/2 text-fill-color w-5 h-5" />
             <input
               type="text"
               placeholder="Search posts..."
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[var(--card-color2)] border border-[var(--border-color)] text-fill-color text-sm placeholder:text-fill-color/40 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[var(--card-color2)] border border-[var(--border-color)] text-fill-color text-sm placeholder:text-fill-color/40 custom-search-focus"
             />
           </div>
         </div>
